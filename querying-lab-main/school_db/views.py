@@ -58,10 +58,13 @@ SELECT `school_db_student`.`id`,
 # Order the data by highest GPAs first (descending).
 # Print out each student's full name and gpa to the terminal
 def problem_one(request):
+  students = Student.objects.filter(gpa__gt=3.0).order_by('-gpa')
+
+  for student in students:
+    print(f'Full Name: {student.first_name} {student.last_name} GPA: {student.gpa}')
 
 
-
-    return complete(request)
+  return complete(request)
 
 
 # Supporting Query Method Documentation:
@@ -99,10 +102,12 @@ SELECT `school_db_student`.`id`,
 # Order by hire date ascending
 # Print out the instructor's full name and hire date to the terminal
 def problem_two(request):
+  instructors = Instructor.objects.filter(hire_date__year__lt = 2010).order_by('hire_date')
 
+  for instructor in instructors:
+    print(f'Full Name: {instructor.first_name} {instructor.last_name} Hire_Date: {instructor.hire_date}')
 
-
-    return complete(request)
+  return complete(request)
 
 
 # Supporting Query Method Documentation:
@@ -113,6 +118,7 @@ https://docs.djangoproject.com/en/4.0/ref/models/querysets/#lt
 """
 
 # Expected Terminal Response: (format print challenge!)
+# you will get a 3rd instructor with a hire date before 2010
 """
 Full Name: Colin Robinson
 Hire Date: 2009-04-10
@@ -139,10 +145,14 @@ SELECT `school_db_instructor`.`id`,
 # Print the instructors name and courses that he belongs to in the terminal 
 # (Do not hard code his name in the print)
 def problem_three(request):
+  courses = Course.objects.filter(id=2).get()
 
-
-
-    return complete(request)
+  for course in courses:
+    print(f'''Instructor name: {course.instructor.first_name} {course.instructor.last_name}
+  Courses: {course.name}''')
+  
+  
+  return complete(request)
 
 
 # Supporting Query Method Documentation:
