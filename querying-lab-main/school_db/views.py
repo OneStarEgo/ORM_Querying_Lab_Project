@@ -250,10 +250,14 @@ SELECT COUNT(*) AS `__count`
 # Print the new student's id, full name, year, and gpa to the terminal
 # NOTE every time you execute this function a duplicate student will be created with a different primary key number
 def problem_five(request):
+  student = Student.objects.create(first_name = 'Brando', last_name = 'Port', year = 2022, gpa = 3.0)
+  print(f'''  Id: {student.id}
+  Full Name: {student.first_name} {student.last_name}
+  Year: {student.year}
+  GPA: {student.gpa}''')
 
 
-
-    return complete(request)
+  return complete(request)
 
 
 # Supporting Query Method Documentation:
